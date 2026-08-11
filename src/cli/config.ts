@@ -66,22 +66,39 @@ export async function loadRingConfig(): Promise<{ name: string; inviteBudget: nu
 
 export async function fetchRemoteState(url: string): Promise<RingState> {
   const target = new URL('/webring.json', url).href
-  const res = await fetch(target)
-  if (!res.ok) throw new Error(`failed to fetch state from ${target}: ${res.status}`)
-  const ops = await res.json()
-  return deserialize(ops)
+  const controller = new AbortController()
+  const id = setTimeout(() => controller.abort(), 3000)
+
+  try {
+    const res = await fetch(target, { signal: controller.signal })
+    if (!res.ok) throw new Error(`failed to fetch state from ${target}: ${res.status}`)
+    const ops = await res.json()
+    return deserialize(ops)
+  } finally {
+    clearTimeout(id)
+  }
 }
 
 export async function syncWithPeers(state: RingState): Promise<RingState> {
-  const view = deriveView(state)
   let merged = state
+  const fetchedUrls = new Set<string>()
 
-  for (const memberUrl of view.activeMembers) {
-    try {
-      const remote = await fetchRemoteState(memberUrl)
-      merged = merge(merged, remote)
-    } catch {
-      // skip unreachable peers
+  while (true) {
+    const view = deriveView(merged)
+    const unfetched = view.members.filter(m => !fetchedUrls.has(m.url))
+
+    if (unfetched.length === 0) {
+      break
+    }
+
+    for (const member of unfetched) {
+      fetchedUrls.add(member.url)
+      try {
+        const remote = await fetchRemoteState(member.url)
+        merged = merge(merged, remote)
+      } catch {
+        // skip unreachable peers
+      }
     }
   }
 
