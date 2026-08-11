@@ -3,7 +3,7 @@
  */
 export default {
   /** Display name of your webring */
-  name: "my webring",
+  name: "kek's ring",
 
   /** Max invites each member gets */
   inviteBudget: 2,

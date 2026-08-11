@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="logo.png" alt="da-ring" width="250" style="margin: -5em" />
+  <img src="logo.webp" alt="kek's ring" width="250" />
 </p>
 
-<h1 align="center">da-ring</h1>
+<h1 align="center">kek's ring</h1>
 
 <p align="center">
-  <em>a decentralized webring with no central server</em><br/>
+  <em>kek's decentralized webring with no central server -- for kek's stuffs</em><br/>
   <sub>membership via CRDT · browser-side gossip · invite tree governance</sub>
 </p>
 
@@ -17,7 +17,7 @@
 
 ---
 
-**fork this repo to create your own ring.**
+**initialized from [`spuuntries/da-ring`](https://github.com/spuuntries/da-ring) template as example webring.**
 
 ## why
 
@@ -47,14 +47,14 @@ most friends just need to be passive. the genesis member (you) is always active.
 
 ## quick start
 
+> [!NOTE]  
+> This is alrd a fork, so like-- 1-2 is alrd done lol. Ring's alrd initialized. If I've invited u, u can do 3 _or_ 5, depending if someone else invited u.
+
 ### 1. fork & configure
 
-fork [`spuuntries/da-ring`](https://github.com/spuuntries/da-ring) on github, then:
-
 ```bash
-# ↓ change this to your fork's URL after forking
-git clone https://github.com/your-username/da-ring
-cd da-ring
+git clone https://github.com/spuuntries/keks-ring
+cd keks-ring
 npm install
 ```
 
@@ -62,7 +62,7 @@ edit [`ring.config.ts`](ring.config.ts):
 
 ```typescript
 export default {
-  name: "frens webring",
+  name: "kek's ring",
   inviteBudget: 2, // invites per member
 };
 ```
@@ -70,7 +70,7 @@ export default {
 ### 2. initialize your ring
 
 ```bash
-npx da-ring init --url https://your.site
+npx da-ring init --url https://spuun.art
 ```
 
 this generates:
@@ -82,12 +82,12 @@ also add the widget to your own site:
 
 ```html
 <script
-  src="https://your.site/widget.js"
-  data-ring="https://your.site"
+  src="https://spuun.art/keks-ring-widget.js"
+  data-ring="https://spuun.art"
 ></script>
 ```
 
-> host the built `dist/index.widget.js` on your site or a CDN. here it's been renamed as `widget.js` for simplicity, but you can rename the file into whatever, just change it in the `src` field when you're embedding the widget.
+> host the built `dist/index.widget.js` on your site or a CDN. here it's been renamed as `keks-ring-widget.js` for simplicity, but you can rename the file into whatever, just change it in the `src` field when you're embedding the widget.
 
 ### 3. invite friends
 
@@ -99,8 +99,8 @@ re-deploy your updated `webring.json`, then tell your friend to paste the widget
 
 ```html
 <script
-  src="https://your.site/widget.js"
-  data-ring="https://your.site"
+  src="https://spuun.art/keks-ring-widget.js"
+  data-ring="https://spuun.art"
 ></script>
 ```
 
@@ -120,11 +120,11 @@ a passive member who wants to start inviting people:
 
 ```bash
 # clone the ring owner's fork (not the upstream template)
-git clone https://github.com/ring-owner/da-ring
-cd da-ring && npm install
+git clone https://github.com/spuuntries/keks-ring
+cd keks-ring && npm install
 
 # upgrade — pulls state from an active member, generates your keypair
-npx da-ring upgrade --ring https://alice.site --url https://your.site
+npx da-ring upgrade --ring https://alice.site --url https://spuun.art
 ```
 
 this generates their own `webring.json` + keypair. deploy both `webring.json` and the widget to your site:
@@ -132,8 +132,8 @@ this generates their own `webring.json` + keypair. deploy both `webring.json` an
 ```html
 <!-- add this to your site too -->
 <script
-  src="https://your.site/widget.js"
-  data-ring="https://alice.site,https://your.site"
+  src="https://spuun.art/keks-ring-widget.js"
+  data-ring="https://alice.site,https://spuun.art"
 ></script>
 ```
 
@@ -148,6 +148,7 @@ because the webring works by having browsers fetch `webring.json` from other mem
 - **domain redirects**: if your host automatically redirects your naked domain to `www` (or vice versa), the 308 redirect response often drops custom CORS headers, breaking the fetch. to fix this, ensure the URLs in your `data-ring` script tag point directly to your primary non-redirecting domain.
 
 example `vercel.json` for vercel users:
+
 ```json
 {
   "headers": [
@@ -179,14 +180,15 @@ all commands: `npx da-ring <command>`
 **`status` output:**
 
 ```
-✦ frens ring (3 members)
+✦ kek's ring (2 members)
 
-  you: https://alice.site (0/2 invite slots)
+  you: https://spuun.art (1/2 invite slots)
 
-  https://alice.site (genesis, active) [0/2]
-  ├── https://bob.site bob (passive)
-  └── https://carol.site carol (passive)
+  https://spuun.art (genesis, active) [1/2]
+  └── https://kekbot.spuun.art kekbot (passive)
 ```
+
+(this is gona get updated after adding my smol bot pals ok, gime a sec)
 
 ## the crdt
 

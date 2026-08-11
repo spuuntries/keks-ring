@@ -1,0 +1,91 @@
+[
+  {
+    "type": "add",
+    "author": "https://spuun.art",
+    "timestamp": 1786436536795,
+    "seen": [
+      "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a"
+    ],
+    "payload": {
+      "target": "https://kekbot.spuun.art",
+      "name": "kekbot"
+    },
+    "id": "0d1f80e1c2c371d2517e7d2925cd6cdbdd884a63e386123af6bede08d1ed286d",
+    "sig": "5a27011fe5d5fa7dad2c5a604ba8f4fefb230f2b6e14cb524bb32aae648ba7f7b679ba79933f1fec1151cf8ddc6a9e86d64014a3d1b87788920c122485f58d04"
+  },
+  {
+    "type": "key-claim",
+    "author": "https://spuun.art",
+    "timestamp": 1786415843140,
+    "seen": [
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a"
+    ],
+    "payload": {
+      "pubkey": "cf345e1b68b9bf5de0c1e2cf9d92e2c79827a774891c962aaf81275b0e5e3a42"
+    },
+    "id": "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+    "sig": "1c53c3e360ad468d29ccbcf1c2b9c1d4910e5970a51faa06bba49e1ffb7b39543aa038ed6542e137bbb77bb7aa385a5eba404754a6c8cbb7b2e733b1ee5f3200"
+  },
+  {
+    "type": "revoke",
+    "author": "https://spuun.art",
+    "timestamp": 1786436618507,
+    "seen": [
+      "0d1f80e1c2c371d2517e7d2925cd6cdbdd884a63e386123af6bede08d1ed286d",
+      "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+      "81ccfeaf20ba139cf1b776df64d0b71839051184818cc149f5b0dcb2e530f122",
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a",
+      "df6b529470ba117c0efc5669b812534067772c6693fcf20fdd53a680cad52259"
+    ],
+    "payload": {
+      "target": "https://lily.spuun.art"
+    },
+    "id": "75e33f46f22578115e3e32c5248742189bd68679f6dde8e6223c95fa2071ceb8",
+    "sig": "7a3533a4eba82c04c6df927e73da4703ed167820a1eed30f698156fada1a10b8f1e4b57f9363beae6081febe759970e06b74316b7bbc17a906ea23c138bd4d0c"
+  },
+  {
+    "type": "add",
+    "author": "https://spuun.art",
+    "timestamp": 1786436549086,
+    "seen": [
+      "0d1f80e1c2c371d2517e7d2925cd6cdbdd884a63e386123af6bede08d1ed286d",
+      "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a"
+    ],
+    "payload": {
+      "target": "https://lily.spuun.art",
+      "name": "lily"
+    },
+    "id": "81ccfeaf20ba139cf1b776df64d0b71839051184818cc149f5b0dcb2e530f122",
+    "sig": "267f93e82058a6335d011fdc40d8a63b5df01a6e62267ea5b21a7295fffa2e1e9a7ec989f85845c9c1a9f06be000d47233132403e426ac6f884ffedf9309da0f"
+  },
+  {
+    "type": "genesis",
+    "author": "https://spuun.art",
+    "timestamp": 1786415843139,
+    "seen": [],
+    "payload": {
+      "name": "kek's ring",
+      "inviteBudget": 2
+    },
+    "id": "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a",
+    "sig": "dd91988c003c6b6d9d3ea55bdb222eb868875e6118b953ebc029c0ee8a390672f940b99b3909df38b75597ba2a149c72f966118c5dd278574aeab41160d3190f"
+  },
+  {
+    "type": "revoke",
+    "author": "https://spuun.art",
+    "timestamp": 1786436579590,
+    "seen": [
+      "0d1f80e1c2c371d2517e7d2925cd6cdbdd884a63e386123af6bede08d1ed286d",
+      "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+      "81ccfeaf20ba139cf1b776df64d0b71839051184818cc149f5b0dcb2e530f122",
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a"
+    ],
+    "payload": {
+      "target": "lily"
+    },
+    "id": "df6b529470ba117c0efc5669b812534067772c6693fcf20fdd53a680cad52259",
+    "sig": "d2b36686d59405ebda9cd1bf96e930b35d65ad5c779ef726654602047a88299a23e134d9860a93b1561ea1850fe5723db9de137974279191c8d8fba25ce49903"
+  }
+]
