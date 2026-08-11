@@ -2,148 +2,243 @@ import type { RingView } from '../crdt/index.js'
 import { getNeighbors } from '../crdt/index.js'
 
 const styles = `
-  :host {
-    display: block;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --ring-bg: rgba(255, 255, 255, 0.92);
-    --ring-border: rgba(0, 0, 0, 0.08);
-    --ring-text: #333;
-    --ring-accent: #8b5cf6;
-    --ring-hover: rgba(139, 92, 246, 0.08);
-    --ring-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-    --ring-radius: 10px;
+  @font-face {
+    font-family: 'W95';
+    src: local('MS Sans Serif'), local('Microsoft Sans Serif'), local('Tahoma'), local('Arial');
   }
 
-  @media (prefers-color-scheme: dark) {
-    :host {
-      --ring-bg: rgba(28, 28, 32, 0.92);
-      --ring-border: rgba(255, 255, 255, 0.08);
-      --ring-text: #e4e4e7;
-      --ring-accent: #a78bfa;
-      --ring-hover: rgba(167, 139, 250, 0.1);
-      --ring-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+  :host {
+    display: block;
+    font-family: 'W95', 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    --win-bg: #c0c0c0;
+    --win-text: #000;
+    --win-title: #000080;
+    --win-title-text: #fff;
+    --win-title-inactive: #808080;
+    --win-highlight: #000080;
+    --win-highlight-text: #fff;
+    --win-light: #dfdfdf;
+    --win-dark: #808080;
+    --win-darker: #404040;
+    --win-white: #fff;
   }
 
   .widget {
-    background: var(--ring-bg);
-    border: 1px solid var(--ring-border);
-    border-radius: var(--ring-radius);
-    box-shadow: var(--ring-shadow);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: var(--ring-text);
-    max-width: 420px;
+    background: var(--win-bg);
+    border-top: 2px solid var(--win-white);
+    border-left: 2px solid var(--win-white);
+    border-right: 2px solid var(--win-darker);
+    border-bottom: 2px solid var(--win-darker);
+    max-width: 380px;
     margin: 0 auto;
+    padding: 2px;
+    color: var(--win-text);
+  }
+
+  .titlebar {
+    background: linear-gradient(90deg, var(--win-title), #1084d0);
+    color: var(--win-title-text);
+    font-weight: 700;
+    font-size: 11px;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+    user-select: none;
+    letter-spacing: 0.02em;
+  }
+
+  .titlebar-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .titlebar-icon {
+    font-size: 10px;
+  }
+
+  .titlebar-btn {
+    background: var(--win-bg);
+    border-top: 1px solid var(--win-white);
+    border-left: 1px solid var(--win-white);
+    border-right: 1px solid var(--win-darker);
+    border-bottom: 1px solid var(--win-darker);
+    width: 16px;
+    height: 14px;
+    font-size: 8px;
+    line-height: 12px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--win-text);
+    padding: 0;
+    font-family: inherit;
+  }
+
+  .titlebar-btn:active {
+    border-top: 1px solid var(--win-darker);
+    border-left: 1px solid var(--win-darker);
+    border-right: 1px solid var(--win-white);
+    border-bottom: 1px solid var(--win-white);
   }
 
   .bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 4px;
-    height: 42px;
+    justify-content: center;
+    gap: 2px;
+    padding: 4px 3px;
+    background: var(--win-bg);
   }
 
-  .nav-link {
+  .nav-btn {
     text-decoration: none;
-    color: var(--ring-text);
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    font-size: 0.85em;
-    letter-spacing: 0.02em;
-    opacity: 0.8;
-  }
-
-  .nav-link:hover {
-    background: var(--ring-hover);
-    color: var(--ring-accent);
-    opacity: 1;
-  }
-
-  .center {
-    font-weight: 600;
-    font-size: 0.88em;
+    color: var(--win-text);
+    background: var(--win-bg);
+    border-top: 2px solid var(--win-white);
+    border-left: 2px solid var(--win-white);
+    border-right: 2px solid var(--win-darker);
+    border-bottom: 2px solid var(--win-darker);
+    padding: 3px 12px;
+    font-size: 11px;
+    font-family: inherit;
     cursor: pointer;
-    padding: 4px 10px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    text-align: center;
+    min-width: 60px;
+  }
+
+  .nav-btn:hover {
+    /* no fancy hover, this is win95 baby */
+  }
+
+  .nav-btn:active {
+    border-top: 2px solid var(--win-darker);
+    border-left: 2px solid var(--win-darker);
+    border-right: 2px solid var(--win-white);
+    border-bottom: 2px solid var(--win-white);
+    padding: 4px 11px 2px 13px;
+  }
+
+  .divider {
+    width: 2px;
+    height: 22px;
+    border-left: 1px solid var(--win-dark);
+    border-right: 1px solid var(--win-white);
+    margin: 0 2px;
+  }
+
+  .center-label {
+    font-weight: 700;
+    font-size: 11px;
+    padding: 3px 8px;
+    cursor: pointer;
     user-select: none;
-    letter-spacing: 0.01em;
+    color: var(--win-text);
+    background: var(--win-bg);
+    border-top: 2px solid var(--win-white);
+    border-left: 2px solid var(--win-white);
+    border-right: 2px solid var(--win-darker);
+    border-bottom: 2px solid var(--win-darker);
+    text-align: center;
+    min-width: 80px;
   }
 
-  .center:hover {
-    background: var(--ring-hover);
-  }
-
-  .accent {
-    color: var(--ring-accent);
-    font-size: 0.75em;
+  .center-label:active {
+    border-top: 2px solid var(--win-darker);
+    border-left: 2px solid var(--win-darker);
+    border-right: 2px solid var(--win-white);
+    border-bottom: 2px solid var(--win-white);
   }
 
   .member-list {
     max-height: 0;
     overflow-y: auto;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-top: 1px solid transparent;
+    overflow-x: hidden;
+    transition: max-height 0.15s ease-out;
   }
 
   .member-list.expanded {
-    max-height: 220px;
-    border-top-color: var(--ring-border);
+    max-height: 200px;
+    border-top: 1px solid var(--win-dark);
+    border-left: 1px solid var(--win-dark);
+    border-right: 1px solid var(--win-white);
+    border-bottom: 1px solid var(--win-white);
+    background: var(--win-white);
+    margin: 0 3px 3px 3px;
   }
 
   .member-item {
     display: block;
-    padding: 9px 16px;
+    padding: 2px 4px;
     text-decoration: none;
-    color: var(--ring-text);
-    font-size: 0.85em;
-    border-bottom: 1px solid var(--ring-border);
-    transition: background-color 0.15s ease;
-  }
-
-  .member-item:last-child {
-    border-bottom: none;
+    color: var(--win-text);
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
   }
 
   .member-item:hover {
-    background: var(--ring-hover);
+    background: var(--win-highlight);
+    color: var(--win-highlight-text);
   }
 
   .member-item.current {
-    border-left: 3px solid var(--ring-accent);
-    padding-left: 13px;
-    font-weight: 500;
-    color: var(--ring-accent);
+    background: var(--win-highlight);
+    color: var(--win-highlight-text);
   }
 
   .member-name {
-    opacity: 0.5;
-    font-size: 0.9em;
     margin-left: 6px;
+    opacity: 0.6;
+  }
+
+  .member-item:hover .member-name,
+  .member-item.current .member-name {
+    opacity: 0.8;
   }
 
   .status-msg {
     text-align: center;
-    padding: 12px;
-    font-size: 0.85em;
-    opacity: 0.6;
+    padding: 8px;
+    font-size: 11px;
   }
 
-  .loading-dot {
-    display: inline-block;
-    animation: pulse 1.4s ease-in-out infinite;
+  .statusbar {
+    background: var(--win-bg);
+    border-top: 1px solid var(--win-dark);
+    padding: 2px 4px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
+  .statusbar-panel {
+    border-top: 1px solid var(--win-dark);
+    border-left: 1px solid var(--win-dark);
+    border-right: 1px solid var(--win-white);
+    border-bottom: 1px solid var(--win-white);
+    padding: 1px 4px;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .loading-blink {
+    animation: blink95 1s step-start infinite;
+  }
+
+  @keyframes blink95 {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 `
 
@@ -160,22 +255,38 @@ export function renderWidget(
   }
 
   const root = container.shadowRoot!
+  const title = view?.name || "kek's ring"
 
   if (status === 'loading') {
     root.innerHTML = `<style>${styles}</style>
-      <div class="widget"><div class="status-msg"><span class="loading-dot">·</span> loading ring <span class="loading-dot">·</span></div></div>`
+      <div class="widget">
+        <div class="titlebar">
+          <span class="titlebar-text"><span class="titlebar-icon">🌐</span> ${title}</span>
+        </div>
+        <div class="status-msg"><span class="loading-blink">■</span> Loading ring...</div>
+      </div>`
     return
   }
 
   if (status === 'error') {
     root.innerHTML = `<style>${styles}</style>
-      <div class="widget"><div class="status-msg">ring unavailable</div></div>`
+      <div class="widget">
+        <div class="titlebar">
+          <span class="titlebar-text"><span class="titlebar-icon">🌐</span> ${title}</span>
+        </div>
+        <div class="status-msg">⚠ Ring unavailable</div>
+      </div>`
     return
   }
 
   if (status === 'empty' || !view || view.members.length === 0) {
     root.innerHTML = `<style>${styles}</style>
-      <div class="widget"><div class="status-msg">ring is empty</div></div>`
+      <div class="widget">
+        <div class="titlebar">
+          <span class="titlebar-text"><span class="titlebar-icon">🌐</span> ${title}</span>
+        </div>
+        <div class="status-msg">Ring is empty</div>
+      </div>`
     return
   }
 
@@ -189,25 +300,32 @@ export function renderWidget(
   root.innerHTML = `
     <style>${styles}</style>
     <div class="widget">
+      <div class="titlebar">
+        <span class="titlebar-text"><span class="titlebar-icon">🌐</span> ${view.name}</span>
+        <button class="titlebar-btn" id="ring-toggle" title="Members">▼</button>
+      </div>
       <div class="bar">
-        <a class="nav-link" href="${prev?.url || '#'}" title="${prev?.name || 'previous'}">← prev</a>
-        <div class="center" id="ring-title">
-          <span class="accent">✦</span> ${view.name} <span class="accent">✦</span>
-        </div>
-        <a class="nav-link" href="${next?.url || '#'}" title="${next?.name || 'next'}">next →</a>
+        <a class="nav-btn" href="${prev?.url || '#'}" title="${prev?.name || 'previous'}">◄ Prev</a>
+        <div class="divider"></div>
+        <div class="center-label" id="ring-title">${view.members.length} site${view.members.length !== 1 ? 's' : ''}</div>
+        <div class="divider"></div>
+        <a class="nav-btn" href="${next?.url || '#'}" title="${next?.name || 'next'}">Next ►</a>
       </div>
       <div class="member-list" id="member-list">
         ${memberListHtml}
       </div>
+      <div class="statusbar">
+        <span class="statusbar-panel">Ring: ${view.name}</span>
+      </div>
     </div>
   `
 
+  const toggleBtn = root.getElementById('ring-toggle')
   const titleBtn = root.getElementById('ring-title')
   const memberList = root.getElementById('member-list')
 
-  if (titleBtn && memberList) {
-    titleBtn.addEventListener('click', () => {
-      memberList.classList.toggle('expanded')
-    })
-  }
+  const toggle = () => memberList?.classList.toggle('expanded')
+
+  toggleBtn?.addEventListener('click', toggle)
+  titleBtn?.addEventListener('click', toggle)
 }
