@@ -16,6 +16,24 @@
   },
   {
     "type": "key-claim",
+    "author": "https://kekbot.spuun.art",
+    "timestamp": 1786437581262,
+    "seen": [
+      "0d1f80e1c2c371d2517e7d2925cd6cdbdd884a63e386123af6bede08d1ed286d",
+      "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+      "75e33f46f22578115e3e32c5248742189bd68679f6dde8e6223c95fa2071ceb8",
+      "81ccfeaf20ba139cf1b776df64d0b71839051184818cc149f5b0dcb2e530f122",
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a",
+      "df6b529470ba117c0efc5669b812534067772c6693fcf20fdd53a680cad52259"
+    ],
+    "payload": {
+      "pubkey": "fe8ea6ab41253284e9b188420c723f979f1e0142d4da564896f8eae258249d4e"
+    },
+    "id": "1cfc9e72ae7ef0b0d17860ed1e8d857f18866d6d76caf45e011ab1d2f2d9eca1",
+    "sig": "073352244c29f94a29f46a338214cd523e945efaf16fcca7c1eab89e2eeea40f6727e814c9d37666c012a45aea57c577910f532f6004ea8803f6c39048c85b09"
+  },
+  {
+    "type": "key-claim",
     "author": "https://spuun.art",
     "timestamp": 1786415843140,
     "seen": [
@@ -59,6 +77,26 @@
     },
     "id": "81ccfeaf20ba139cf1b776df64d0b71839051184818cc149f5b0dcb2e530f122",
     "sig": "267f93e82058a6335d011fdc40d8a63b5df01a6e62267ea5b21a7295fffa2e1e9a7ec989f85845c9c1a9f06be000d47233132403e426ac6f884ffedf9309da0f"
+  },
+  {
+    "type": "add",
+    "author": "https://kekbot.spuun.art",
+    "timestamp": 1786438287030,
+    "seen": [
+      "0d1f80e1c2c371d2517e7d2925cd6cdbdd884a63e386123af6bede08d1ed286d",
+      "1cfc9e72ae7ef0b0d17860ed1e8d857f18866d6d76caf45e011ab1d2f2d9eca1",
+      "454f9e44f22f4ab3e61b74804495506a3e7cf71e117fd5146d032837d07d18e9",
+      "75e33f46f22578115e3e32c5248742189bd68679f6dde8e6223c95fa2071ceb8",
+      "81ccfeaf20ba139cf1b776df64d0b71839051184818cc149f5b0dcb2e530f122",
+      "aa62898243eed9585251900f7be7cc50f977e1a8f0a89079ad5ec847bce5248a",
+      "df6b529470ba117c0efc5669b812534067772c6693fcf20fdd53a680cad52259"
+    ],
+    "payload": {
+      "target": "https://lily.spuun.art",
+      "name": "lily"
+    },
+    "id": "955c19f5f9b3ab8304f1cd9151f21deaa3e68af6eeb72dc0df117d73e1d6169c",
+    "sig": "0fa0d92fc074569bbf6561ca269748b8a0207b45516617e2a0dbc2947e528de1366a3f10a93006f5c4f4f7a69c4ac670f91fd9a05f2c5340d6b180be91a30a01"
   },
   {
     "type": "genesis",

@@ -6,7 +6,8 @@
 
 <p align="center">
   <em>kek's decentralized webring with no central server -- for kek's stuffs</em><br/>
-  <sub>membership via CRDT · browser-side gossip · invite tree governance</sub>
+  <sub>membership via CRDT · browser-side gossip · invite tree governance</sub><br/><br/>
+  check out the sample at <a href="https://spuun.art/about">https://spuun.art/about</a>
 </p>
 
 <p align="center">
@@ -180,12 +181,13 @@ all commands: `npx da-ring <command>`
 **`status` output:**
 
 ```
-✦ kek's ring (2 members)
+✦ kek's ring (3 members)
 
   you: https://spuun.art (1/2 invite slots)
 
   https://spuun.art (genesis, active) [1/2]
-  └── https://kekbot.spuun.art kekbot (passive)
+  └── https://kekbot.spuun.art kekbot (active) [1/2]
+      └── https://lily.spuun.art lily (passive)
 ```
 
 (this is gona get updated after adding my smol bot pals ok, gime a sec)
