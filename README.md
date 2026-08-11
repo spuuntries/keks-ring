@@ -7,7 +7,7 @@
 <p align="center">
   <em>kek's decentralized webring with no central server -- for kek's stuffs</em><br/>
   <sub>membership via CRDT · browser-side gossip · invite tree governance</sub><br/><br/>
-  check out the sample at <a href="https://spuun.art/about">https://spuun.art/about</a>
+  check out the sample at <a href="https://spuun.art/">https://spuun.art/</a>
 </p>
 
 <p align="center">
