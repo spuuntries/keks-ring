@@ -83,7 +83,7 @@ npx da-ring init --url https://spuun.art
 
 this generates:
 
-- **`frens-webring.json`** — deploy to your site root
+- **`keks-ring.json`** — deploy to your site root
 - **`.da-ring/keys.json`** — your keypair _(gitignored, keep safe!)_
 
 also add the widget to your own site:
@@ -92,7 +92,7 @@ also add the widget to your own site:
 <script
   src="https://your.site/widget.js"
   data-ring="https://your.site"
-  data-ring-name="frens webring"
+  data-ring-name="kek's ring"
 ></script>
 ```
 
@@ -104,13 +104,13 @@ also add the widget to your own site:
 npx da-ring invite https://friend.site --name "friend"
 ```
 
-re-deploy your updated `frens-webring.json`, then tell your friend to paste the widget:
+re-deploy your updated `keks-ring.json`, then tell your friend to paste the widget:
 
 ```html
 <script
   src="https://your.site/widget.js"
   data-ring="https://your.site"
-  data-ring-name="frens webring"
+  data-ring-name="kek's ring"
 ></script>
 ```
 
@@ -137,14 +137,14 @@ cd keks-ring && npm install
 npx da-ring upgrade --ring https://alice.site --url https://spuun.art
 ```
 
-this generates their own `frens-webring.json` + keypair. deploy both `frens-webring.json` and the widget to your site:
+this generates their own `keks-ring.json` + keypair. deploy both `keks-ring.json` and the widget to your site:
 
 ```html
 <!-- add this to your site too -->
 <script
   src="https://your.site/widget.js"
   data-ring="https://alice.site,https://your.site"
-  data-ring-name="frens webring"
+  data-ring-name="kek's ring"
 ></script>
 ```
 
@@ -158,13 +158,13 @@ because the webring works by having browsers fetch `<ring-name>.json` from other
 - **vercel / netlify**: you must add a `vercel.json` or `netlify.toml` file to your site's root to explicitly add the headers.
 - **domain redirects**: if your host automatically redirects your naked domain to `www` (or vice versa), the 308 redirect response often drops custom CORS headers, breaking the fetch. to fix this, ensure the URLs in your `data-ring` script tag point directly to your primary non-redirecting domain.
 
-example `vercel.json` for vercel users (replace `frens-webring.json` with your ring's filename):
+example `vercel.json` for vercel users (replace `keks-ring.json` with your ring's filename):
 
 ```json
 {
   "headers": [
     {
-      "source": "/frens-webring.json",
+      "source": "/keks-ring.json",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" }
