@@ -83,15 +83,16 @@ npx da-ring init --url https://spuun.art
 
 this generates:
 
-- **`webring.json`** — deploy to your site root
+- **`frens-webring.json`** — deploy to your site root
 - **`.da-ring/keys.json`** — your keypair _(gitignored, keep safe!)_
 
 also add the widget to your own site:
 
 ```html
 <script
-  src="https://spuun.art/keks-ring-widget.js"
-  data-ring="https://spuun.art"
+  src="https://your.site/widget.js"
+  data-ring="https://your.site"
+  data-ring-name="frens webring"
 ></script>
 ```
 
@@ -103,12 +104,13 @@ also add the widget to your own site:
 npx da-ring invite https://friend.site --name "friend"
 ```
 
-re-deploy your updated `webring.json`, then tell your friend to paste the widget:
+re-deploy your updated `frens-webring.json`, then tell your friend to paste the widget:
 
 ```html
 <script
-  src="https://spuun.art/keks-ring-widget.js"
-  data-ring="https://spuun.art"
+  src="https://your.site/widget.js"
+  data-ring="https://your.site"
+  data-ring-name="frens webring"
 ></script>
 ```
 
@@ -135,13 +137,14 @@ cd keks-ring && npm install
 npx da-ring upgrade --ring https://alice.site --url https://spuun.art
 ```
 
-this generates their own `webring.json` + keypair. deploy both `webring.json` and the widget to your site:
+this generates their own `frens-webring.json` + keypair. deploy both `frens-webring.json` and the widget to your site:
 
 ```html
 <!-- add this to your site too -->
 <script
-  src="https://spuun.art/keks-ring-widget.js"
-  data-ring="https://alice.site,https://spuun.art"
+  src="https://your.site/widget.js"
+  data-ring="https://alice.site,https://your.site"
+  data-ring-name="frens webring"
 ></script>
 ```
 
@@ -149,19 +152,19 @@ now you're active — can invite others and contribute to ring redundancy. note 
 
 ## hosting & cors
 
-because the webring works by having browsers fetch `webring.json` from other members' domains, **your web server MUST be configured to send CORS headers** (`Access-Control-Allow-Origin: *`) for the json file.
+because the webring works by having browsers fetch `<ring-name>.json` from other members' domains, **your web server MUST be configured to send CORS headers** (`Access-Control-Allow-Origin: *`) for the json file.
 
 - **github pages**: usually enables this by default.
 - **vercel / netlify**: you must add a `vercel.json` or `netlify.toml` file to your site's root to explicitly add the headers.
 - **domain redirects**: if your host automatically redirects your naked domain to `www` (or vice versa), the 308 redirect response often drops custom CORS headers, breaking the fetch. to fix this, ensure the URLs in your `data-ring` script tag point directly to your primary non-redirecting domain.
 
-example `vercel.json` for vercel users:
+example `vercel.json` for vercel users (replace `frens-webring.json` with your ring's filename):
 
 ```json
 {
   "headers": [
     {
-      "source": "/webring.json",
+      "source": "/frens-webring.json",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" }
